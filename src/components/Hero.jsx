@@ -7,7 +7,7 @@ function Hero() {
                 AI Resume Analyzer
             </h1>
 
-            <p className="text-gray-600 text-lg max-w-2xl mb-8">
+            <p className="text-gray-600 text-lg max-w-2xl mb-1">
                 Upload your resume and receive an ATS score,
                 AI-powered suggestions, and personalized feedback
                 to improve your chances of getting hired.
