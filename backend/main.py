@@ -1,10 +1,10 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from openai import AsyncOpenAI
 import fitz
 import io
 import os
 import json
-from groq import Groq
 from dotenv import load_dotenv
 from fastapi.responses import StreamingResponse
 from reportlab.platypus import SimpleDocTemplate, Paragraph
@@ -24,7 +24,11 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+# Initialized using AsyncOpenAI mapped to Groq's endpoint
+client = AsyncOpenAI(
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.getenv("GROQ_API_KEY")
+)
 
 
 @app.get("/")
@@ -41,9 +45,8 @@ async def ai_analyser(file: UploadFile = File(...)):
         for page in doc:
             text += page.get_text()
 
-        response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            response_format={"type": "json_object"},
+        response = await client.chat.completions.create(
+            model="openai/gpt-oss-120b",
             messages=[
                 {
                     "role": "system",
@@ -80,7 +83,6 @@ async def ai_analyser(file: UploadFile = File(...)):
 
     except Exception as e:
         print("Backend Error:", str(e))
-        # Raise HTTP 500 so fetch() in React detects response.ok === false
         raise HTTPException(status_code=500, detail=str(e))
 
 
