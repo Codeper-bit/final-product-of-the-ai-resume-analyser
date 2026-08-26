@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://final-product-of-the-ai-resume-analyser.onrender.com";
 
 function Upload({ setShowResult, setAnalysisData }) {
     const [file, setFile] = useState(null);
