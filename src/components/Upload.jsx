@@ -80,7 +80,7 @@ function Upload({ setShowResult, setAnalysisData }) {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-lg bg-white shadow-sm max-w-md mx-auto my-6">
+        <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-lg bg-white shadow-sm max-w-md mx-auto my-3">
             <input
                 type="file"
                 accept="application/pdf"
