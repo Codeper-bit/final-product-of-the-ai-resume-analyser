@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from openai import AsyncOpenAI
+from groq import AsyncGroq
 import fitz
 import io
 import os
@@ -25,8 +25,7 @@ app.add_middleware(
 )
 
 # Initialized using AsyncOpenAI mapped to Groq's endpoint
-client = AsyncOpenAI(
-    base_url="https://api.groq.com/openai/v1",
+client = AsyncGroq(
     api_key=os.getenv("GROQ_API_KEY")
 )
 
