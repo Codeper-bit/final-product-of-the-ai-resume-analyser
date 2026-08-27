@@ -43,6 +43,13 @@ function Upload({ setShowResult, setAnalysisData }) {
             setAnalysisData(parsedData);
             setShowResult(true);
 
+            setTimeout (() => {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+
         } catch (error) {
             console.error("Error connecting to backend API:", error);
             alert(`Failed to analyze resume: ${error.message}`);
